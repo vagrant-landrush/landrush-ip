@@ -1,6 +1,6 @@
 # Settings
 PROG_NAME=landrush-ip
-PROG_VERSION=0.1.0
+PROG_VERSION=0.1.1
 GOVERSION=1.4
 PWD=$(shell pwd)
 
