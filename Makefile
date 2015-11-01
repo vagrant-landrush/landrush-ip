@@ -28,12 +28,12 @@ build:
 	gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}"
 ifeq ($(TRAVIS),true)
 ifeq ($(strip $(TRAVIS_TAG)),)
-	ghr --username Werelds --token $(GITHUB_TOKEN) --replace $(TRAVIS_BRANCH) dist/
+	ghr --username Werelds --replace $(TRAVIS_BRANCH) dist/
 else
-	ghr --username Werelds --token $(GITHUB_TOKEN) --replace $(TRAVIS_TAG) dist/
+	ghr --username Werelds --replace $(TRAVIS_TAG) dist/
 endif
 else
-	ghr --username Werelds --token $(GITHUB_TOKEN) --replace --prerelease --debug pre-release dist/
+	ghr --username Werelds --replace --prerelease --debug pre-release dist/
 endif
 
 # Targets
