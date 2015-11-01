@@ -27,13 +27,9 @@ linux_%: export GOOS=linux
 build:
 	gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}"
 ifeq ($(TRAVIS),true)
-ifeq ($(strip $(TRAVIS_TAG)),)
-	ghr --username Werelds --replace $(TRAVIS_BRANCH) dist/
-else
+ifneq ($(strip $(TRAVIS_TAG)),)
 	ghr --username Werelds --replace $(TRAVIS_TAG) dist/
 endif
-else
-	ghr --username Werelds --replace --prerelease --debug pre-release dist/
 endif
 
 # Targets
