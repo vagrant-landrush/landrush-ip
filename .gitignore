@@ -1,2 +1,25 @@
-/dist
-/landrush-ip
+# Some standard file formats to ignore
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# SQLite databases
+*.sqlite
+
+# The various thumbnail crap
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# IDEs
+.idea
+
+# Artifacts
+dist
+landrush-ip
