@@ -1,12 +1,9 @@
 language: go
 go:
-  - 1.4
+  - 1.5
 env:
   - "PATH=/home/travis/gopath/bin:$PATH"
-before_install:
-  - go get github.com/mitchellh/gox
-  - go get github.com/tcnksm/ghr
-  - gox -build-toolchain
-script:
-  - gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}"
-  - ghr --username Werelds --token $GITHUB_TOKEN --replace --prerelease --debug pre-release dist/
+before_install: |
+  go get github.com/mitchellh/gox
+  go get github.com/tcnksm/ghr
+  gox -build-toolchain

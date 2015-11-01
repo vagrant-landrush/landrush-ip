@@ -1,51 +1,48 @@
 # Settings
 PROG_NAME=landrush-ip
-PROG_VERSION=0.1.1
-GOVERSION=1.4
+PROG_VERSION=0.1.2
+GOVERSION=1.5
 PWD=$(shell pwd)
 
-# Phony targets
-.PHONY: all clean \
-	mac_x86 mac_x64 \
-	win_x86 win_x64 \
-	linux_x86 linux_x64
+# GOOS
+GOOSARCH = darwin_386 \
+	darwin_amd64 \
+	linux_386 \
+	linux_amd64 \
+	windows_386 \
+	windows_amd64
 
-# Macro for the actual build command
-build=docker run --rm \
-	-v "$(PWD)":/go/src/$(PROG_NAME) \
-	-w /go/src/$(PROG_NAME) \
-	-e GOOS=$(1) \
-	-e GOARCH=$(2) \
-	golang:$(GOVERSION)-cross \
-	sh -c "go get && go build -v -o ./dist/$(PROG_VERSION)/$(PROG_NAME)-$(1)-$(2)$(3)"
-	
+# Shared GOOS / GOARCH combinations
+darwin_%: export GOOS=darwin
+windows_%: export GOOS=windows
+windows_%: export GOEXT=.exe
+linux_%: export GOOS=linux
+
+%_386: export GOARCH=386
+%_amd64: export GOARCH=amd64
+
+# Phony targets
+.PHONY: all clean $(GOOSARCH)
+
+build:
+	gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}"
+ifeq ($(TRAVIS),true)
+ifeq ($(strip $(TRAVIS_TAG)),)
+	ghr --username Werelds --token $(GITHUB_TOKEN) --replace $(TRAVIS_BRANCH) dist/
+else
+	ghr --username Werelds --token $(GITHUB_TOKEN) --replace $(TRAVIS_TAG) dist/
+endif
+else
+	ghr --username Werelds --token $(GITHUB_TOKEN) --replace --prerelease --debug pre-release dist/
+endif
+
 # Targets
-all: clean mac_x86 mac_x64 win_x86 win_x64 linux_x86 linux_x64
+all: clean $(GOOSARCH)
 
 clean:
 	@mkdir -p ./dist/$(PROG_VERSION)
 	@rm -fr ./dist/$(PROG_VERSION)/*
 
-mac_x86:
-	@echo "Building for OS X (32-bit)"
-	@$(call build,darwin,386)
-
-mac_x64:
-	@echo "Building for OS X (64-bit)"
-	@$(call build,darwin,amd64)
-
-win_x86:
-	@echo "Building for Windows (32-bit)"
-	@$(call build,windows,386,.exe)
-
-win_x64:
-	@echo "Building for Windows (64-bit)"
-	@$(call build,windows,amd64,.exe)
-
-linux_x86:
-	@echo "Building for Linux (32-bit)"
-	@$(call build,linux,386)
-
-linux_x64:
-	@echo "Building for Linux (64-bit)"
-	@$(call build,linux,amd64)
+$(GOOSARCH):
+	@echo "Building $@"
+	go build -o ./dist/$(PROG_VERSION)/$(PROG_NAME)-$(GOOS)-$(GOARCH)$(GOEXT)
