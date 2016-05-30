@@ -6,6 +6,7 @@ rvm:
 - 2.2.4
 before_install:
 - gem install bundler -v 1.10.6
+install: bundle _1.10.6_ install
 script:
 - bundle _1.10.6_ exec rake
 - bundle _1.10.6_ exec rake build
