@@ -1,0 +1,9 @@
+en:
+  vagrant:
+    config:
+      landrush_ip:
+        not_enabled: "Landrush IP override not enabled and Landrush was not found, nothing to do."
+        not_installed: "Landrush IP not installed in guest yet (or it's an outdated version). Installing now."
+        errors:
+          unsupported_arch: "Unsupported architecture"
+          cannot_install: "Unable to install landrush-ip"

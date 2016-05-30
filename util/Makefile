@@ -4,6 +4,8 @@ PROG_VERSION=0.1.2
 GOVERSION=1.5
 PWD=$(shell pwd)
 
+OUTPUT_PATTERN=dist/landrush-ip-{{.OS}}_{{.Arch}}
+
 # GOOS
 GOOSARCH = darwin_386 \
 	darwin_amd64 \
@@ -22,23 +24,28 @@ linux_%: export GOOS=linux
 %_amd64: export GOARCH=amd64
 
 # Phony targets
-.PHONY: all clean $(GOOSARCH)
+.PHONY: all deps clean $(GOOSARCH)
 
-build:
-	gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}"
-ifeq ($(TRAVIS),true)
-ifneq ($(strip $(TRAVIS_TAG)),)
-	ghr --username Werelds --replace $(TRAVIS_TAG) dist/
-endif
-endif
+# Not building Windows or Darwin ports yet, sticking to Linux for now
+build: clean deps
+	gox \
+		-output "$(OUTPUT_PATTERN)" \
+		-rebuild \
+		-ldflags="-s" \
+		-os "linux" \
+		-arch "386 arm amd64"
+
+deps:
+	go get github.com/mitchellh/gox
+	go get -d -v
 
 # Targets
-all: clean $(GOOSARCH)
+all: clean deps $(GOOSARCH)
 
 clean:
-	@mkdir -p ./dist/$(PROG_VERSION)
-	@rm -fr ./dist/$(PROG_VERSION)/*
+	@mkdir -p ./dist
+	@rm -fr ./dist/*
 
 $(GOOSARCH):
 	@echo "Building $@"
-	go build -o ./dist/$(PROG_VERSION)/$(PROG_NAME)-$(GOOS)-$(GOARCH)$(GOEXT)
+	gox -output "$(OUTPUT_PATTERN)" -osarch "$(GOOS)$(GOARCH)"

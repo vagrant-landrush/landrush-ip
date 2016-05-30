@@ -17,9 +17,23 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-# IDEs
-.idea
+# Gem Defaults
+/bundler/
+/cache/
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
 
-# Artifacts
-dist
-landrush-ip
+# Ignore util/version.go - let our Rake task generate that
+/util/version.go
+/util/dist
+
+# Other stuff to ignore
+.idea
+.vagrant

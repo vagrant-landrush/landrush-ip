@@ -1,0 +1,26 @@
+# Inherit the auto-gen config
+inherit_from: .rubocop_todo.yml
+
+# Don't run this shit on other people's code
+AllCops:
+  Exclude:
+    - 'bundler/**/*'
+    - 'cache/**/*'
+
+# Disable the warnings about code-level documentation
+# We'll add it where necessary, rather than defaulting to putting "# :nodoc:" everywhere.
+Documentation:
+  Enabled: false
+
+# 120 feels more comfortable to me.
+Metrics/LineLength:
+  Max: 120
+
+# This is just ridiculous :P
+Metrics/MethodLength:
+  Max: 25
+
+# Don't complain about this one please, plugin is called landrush-ip.
+Style/FileName:
+  Exclude:
+    - 'lib/landrush-ip.rb'

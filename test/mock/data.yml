@@ -1,0 +1,12 @@
+- name: lo
+  ipv4: 127.0.0.1
+  ipv6: ::1
+- name: eth0
+  ipv4: 10.0.2.15
+  ipv6: fe80::a00:27ff:fe1e:c67e
+- name: eth1
+  ipv4: 172.28.128.3
+  ipv6: fe80::a00:27ff:fe66:a46a
+- name: eth2
+  ipv4: 172.28.128.4
+  ipv6: fe80::a00:27ff:fe4c:21c3
