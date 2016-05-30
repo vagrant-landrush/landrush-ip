@@ -1,5 +1,7 @@
 # LandrushIp
 
+[![Build Status](https://travis-ci.org/Werelds/landrush-ip.svg?branch=master)](https://travis-ci.org/Werelds/landrush-ip)
+
 This gem is a capability plugin for Vagrant, used in Landrush (but perfectly usable outside Landrush).
 
 Its sole purpose is to provide a unified interface for grabbing a machine's IP addresses, independent of the OS.
