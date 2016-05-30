@@ -1,3 +1,5 @@
+require 'landrush-ip/version'
+
 module LandrushIp
   module Cap
     module Linux
