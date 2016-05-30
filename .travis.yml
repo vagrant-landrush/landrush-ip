@@ -5,11 +5,10 @@ services:
 rvm:
 - 2.2.4
 before_install:
-- gem uninstall bundler
 - gem install bundler -v 1.10.6
 script:
-- bundle exec rake
-- bundle exec rake build
+- bundle _1.10.6_ exec rake
+- bundle _1.10.6_ exec rake build
 deploy:
   provider: rubygems
   skip_cleanup: true
