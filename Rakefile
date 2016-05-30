@@ -39,7 +39,7 @@ const Version string = "#{LandrushIp::VERSION}"
   sh 'docker run --rm -v $(pwd)/util:/usr/src/landrush-ip -w /usr/src/landrush-ip golang:1.6 make'
 end
 
-task :build => :build_binary
+task build: :build_binary
 
 task default: [
   :rubocop,
