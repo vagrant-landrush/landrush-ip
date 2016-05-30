@@ -143,7 +143,7 @@ JSON (`landrush-ip -json`):
 ## Development
 
 After checking out the repo, run `bundle install` to install dependencies.
- Run `rake spec` to run the tests.
+ Run `rake test` to run the tests.
 
 A `Vagrantfile` is present to run the plugin in if you so desire.
  Make sure to execute in context of the Gem bundle: `bundle exec vagrant <command>`.
