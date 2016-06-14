@@ -20,5 +20,7 @@ Capability plugin for Vagrant that allows more fine grained control over selecti
   spec.files += Dir['util/dist/*']
   spec.files += %w(README.md LICENSE.txt CODE_OF_CONDUCT.md)
 
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
+
+  spec.add_development_dependency 'rake'
 end

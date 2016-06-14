@@ -27,11 +27,40 @@ module LandrushIp
       Cap::Linux::LandrushIpGet
     end
 
+    guest_capability('windows', 'landrush_ip_installed') do
+      require 'landrush-ip/cap/windows/landrush_ip_installed'
+      Cap::Windows::LandrushIpInstalled
+    end
+
+    guest_capability('windows', 'landrush_ip_install') do
+      require 'landrush-ip/cap/windows/landrush_ip_install'
+      Cap::Windows::LandrushIpInstall
+    end
+
+    guest_capability('windows', 'landrush_ip_get') do
+      require 'landrush-ip/cap/windows/landrush_ip_get'
+      Cap::Windows::LandrushIpGet
+    end
+
     require 'landrush-ip/action/install'
 
     %w(up reload).each do |action|
       action_hook(:landrush_ip, "machine_action_#{action}".to_sym) do |hook|
-        hook.before(Landrush::Action::RedirectDns, Action::Install, :provision)
+        if defined?(VagrantPlugins::ProviderVirtualBox)
+          hook.before(VagrantPlugins::ProviderVirtualBox::Action::Network, Action::Install, :provision)
+        end
+
+        if defined?(VagrantPlugins::ProviderLibvirt)
+          hook.after(VagrantPlugins::ProviderLibvirt::Action::CreateNetworks, Action::Install, :provision)
+        end
+
+        if defined?(HashiCorp::VagrantVMwarefusion)
+          hook.before(HashiCorp::VagrantVMwarefusion::Action::Network, Action::Install, :provision)
+        end
+
+        if defined?(VagrantPlugins::Parallels)
+          hook.before(VagrantPlugins::Parallels::Action::Network, Action::Install, :provision)
+        end
       end
     end
   end

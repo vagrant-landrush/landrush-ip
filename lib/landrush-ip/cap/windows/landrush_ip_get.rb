@@ -1,9 +1,9 @@
 require 'yaml'
-require 'landrush-ip/cap/linux'
+require 'landrush-ip/cap/windows'
 
 module LandrushIp
   module Cap
-    module Linux
+    module Windows
       module LandrushIpGet
         def self.landrush_ip_get(machine)
           result = ''
@@ -15,7 +15,7 @@ module LandrushIp
         end
 
         def self.command
-          "#{LandrushIp::Cap::Linux.binary_path} -yaml"
+          "#{LandrushIp::Cap::Windows.binary_path} -yaml"
         end
       end
     end

@@ -26,13 +26,13 @@ linux_%: export GOOS=linux
 # Phony targets
 .PHONY: all deps clean $(GOOSARCH)
 
-# Not building Windows or Darwin ports yet, sticking to Linux for now
+# Not building Darwin ports yet, sticking to Linux and Windows for now
 build: clean deps
 	gox \
 		-output "$(OUTPUT_PATTERN)" \
 		-rebuild \
 		-ldflags="-s" \
-		-os "linux" \
+		-os "linux windows" \
 		-arch "386 arm amd64"
 
 deps:

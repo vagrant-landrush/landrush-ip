@@ -1,15 +1,19 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'bundler/gem_tasks'
+require 'rake'
 require 'rake/testtask'
+require 'rake/clean'
 require 'rubocop/rake_task'
+require 'cucumber/rake/task'
+require 'fileutils'
 
-# Immediately sync all stdout
-$stdout.sync = true
-$stderr.sync = true
+CLOBBER.include('pkg')
+CLEAN.include('build')
 
-# Change to the directory of this file
-Dir.chdir(File.expand_path('../', __FILE__))
+task :init do
+  FileUtils.mkdir_p 'build'
+end
 
 # Rubocop
 RuboCop::RakeTask.new
@@ -22,6 +26,9 @@ Rake::TestTask.new do |t|
   t.pattern = 'test/**/*_test.rb'
   t.libs << 'test'
 end
+
+# Cucumber acceptance test task
+Cucumber::Rake::Task.new(:features)
 
 # Builds the Go binary
 task :build_binary do
@@ -38,6 +45,8 @@ const Version string = "#{LandrushIp::VERSION}"
   sh 'docker pull golang:1.6'
   sh 'docker run --rm -v $(pwd)/util:/usr/src/landrush-ip -w /usr/src/landrush-ip golang:1.6 make'
 end
+
+task features: :init
 
 task build: :build_binary
 

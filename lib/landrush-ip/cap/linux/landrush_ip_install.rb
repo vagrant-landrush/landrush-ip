@@ -1,3 +1,5 @@
+require 'landrush-ip/cap/linux'
+
 module LandrushIp
   module Cap
     module Linux
@@ -23,12 +25,11 @@ module LandrushIp
           binary = determine_binary result
 
           machine.communicate.tap do |comm|
-            guest_path = '/usr/local/bin/landrush-ip'
             host_path  = File.expand_path("util/dist/#{binary}", LandrushIp.source_root)
 
             comm.upload(host_path, '/tmp/landrush-ip')
-            comm.sudo("mv /tmp/landrush-ip #{guest_path}")
-            comm.sudo("chmod +x #{guest_path}", error_check: false)
+            comm.sudo("mv /tmp/landrush-ip #{LandrushIp::Cap::Linux.binary_path}")
+            comm.sudo("chmod +x #{LandrushIp::Cap::Linux.binary_path}", error_check: false)
           end
         end
       end

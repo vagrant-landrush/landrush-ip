@@ -6,6 +6,7 @@ AllCops:
   Exclude:
     - 'bundler/**/*'
     - 'cache/**/*'
+    - 'build/**/*'
 
 # Disable the warnings about code-level documentation
 # We'll add it where necessary, rather than defaulting to putting "# :nodoc:" everywhere.

@@ -29,6 +29,7 @@ Thumbs.db
 /pkg/
 /spec/reports/
 /tmp/
+build
 
 # Ignore util/version.go - let our Rake task generate that
 /util/version.go
