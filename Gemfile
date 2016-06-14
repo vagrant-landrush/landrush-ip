@@ -4,7 +4,7 @@ gemspec
 group :plugins do
   gem 'vagrant-winrm'
   gem 'landrush-ip', path: '.'
-  gem 'landrush', path: '../landrush'
+  gem 'landrush'
 end
 
 group :test do
