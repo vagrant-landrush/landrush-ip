@@ -1,6 +1,6 @@
 # LandrushIp
 
-[![Build Status](https://travis-ci.org/Werelds/landrush-ip.svg?branch=master)](https://travis-ci.org/Werelds/landrush-ip)
+[![Build Status](https://travis-ci.org/vagrant-landrush/landrush-ip.svg?branch=master)](https://travis-ci.org/vagrant-landrush/landrush-ip)
 
 This gem is a capability plugin for Vagrant, used in Landrush (but perfectly usable outside Landrush).
 
@@ -152,7 +152,7 @@ A `Vagrantfile` is present to run the plugin in if you so desire.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Werelds/landrush-ip.
+Bug reports and pull requests are welcome on GitHub at https://github.com/vagrant-landrush/landrush-ip.
  This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
