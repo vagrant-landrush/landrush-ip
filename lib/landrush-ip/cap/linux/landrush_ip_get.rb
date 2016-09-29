@@ -6,6 +6,8 @@ module LandrushIp
     module Linux
       module LandrushIpGet
         def self.landrush_ip_get(machine)
+          machine.guest.capability(:landrush_ip_install) unless machine.guest.capability(:landrush_ip_installed)
+
           result = ''
           machine.communicate.execute(command) do |type, data|
             result << data if type == :stdout

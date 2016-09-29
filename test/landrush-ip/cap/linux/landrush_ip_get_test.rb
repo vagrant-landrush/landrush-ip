@@ -9,7 +9,6 @@ module LandrushIp
           let(:machine) { mock_machine }
 
           it 'should return a hash' do
-            machine.communicate.stub_command(LandrushIp::Cap::Linux::LandrushIpGet.command, mock_output)
             machine.guest.capability(:landrush_ip_get).must_equal mock_data
           end
         end

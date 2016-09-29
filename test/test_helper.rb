@@ -51,6 +51,12 @@ def mock_machine(options = {})
   )
 
   machine.instance_variable_set('@communicator', Mock::Communicator.new)
+
+  # Default Linux stubs
+  machine.communicate.stub_command('uname -mrs', 'Linux 3.16.0-4-amd64 x86_64')
+  machine.communicate.stub_command(LandrushIp::Cap::Linux::LandrushIpInstalled.command, '')
+  machine.communicate.stub_command(LandrushIp::Cap::Linux::LandrushIpGet.command, mock_output)
+
   machine
 end
 

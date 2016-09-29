@@ -11,12 +11,8 @@ module LandrushIp
         @machine.guest.capability(:landrush_ip_installed)
       end
 
-      def override?
-        @machine.config.landrush_ip.override
-      end
-
-      def enabled?
-        override? || (@machine.config.key('landrush') && @machine.config.landrush.enabled)
+      def auto_install?
+        @machine.config.landrush_ip.auto_install
       end
 
       def install
@@ -31,11 +27,11 @@ module LandrushIp
         @machine = env[:machine]
 
         # Auto install in one of 2 cases:
-        # - landrush-ip is forcibly enabled via the override setting
+        # - landrush-ip is forcibly enabled via the auto_install setting
         # - Landrush is installed and enabled
-        install if enabled? && !installed?
+        install if auto_install? && !installed?
 
-        @env[:ui].info I18n.t('vagrant.config.landrush_ip.not_enabled') unless enabled?
+        @env[:ui].info I18n.t('vagrant.config.landrush_ip.not_enabled') unless auto_install?
       end
     end
   end

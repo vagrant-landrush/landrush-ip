@@ -12,7 +12,7 @@ Feature: landrush-ip-linux
 
       config.vm.synced_folder '.', '/vagrant', disabled: true
 
-      config.landrush_ip.override = true
+      config.landrush_ip.auto_install = true
     end
     """
     When I successfully run `bundle exec vagrant up --provider <provider>`
