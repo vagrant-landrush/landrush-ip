@@ -14,7 +14,7 @@ end
 group :development do
   gem 'vagrant',
       git: 'git://github.com/mitchellh/vagrant.git',
-      ref: 'v1.8.1'
+      ref: 'v1.8.4'
 
   gem 'byebug'
   gem 'mocha'

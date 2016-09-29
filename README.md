@@ -20,9 +20,7 @@ Once we're happy with the functionality and mechanics, this will be expanded to 
 
 ## Usage
 
-When used with Landrush, it will automatically be activated and install itself.
-
-Without Landrush, one has to enable it explicitly via `landrush_ip.override` if auto-installation is desired.
+When `landrush_ip_get` is called, the necessary binary will automatically be installed. Alternatively, one can explicitly force automatic installation `landrush_ip.auto_install` if desired.
 
 Other plugins can use the provided capabilities to check if it is installed and/or install it.
 
@@ -73,7 +71,7 @@ By default, it returns the output in TSV (Tab Separated Values) format.
 The JSON and YAML formats output objects and hashes respectively, that have a `name`, `ipv4` and `ipv6` key.
 
 No filtering is done with any of the formats, so any interface that has no assigned IP will still show up.
- It's left up to consumer to filter that out.
+ It's left up to consumers to filter that out.
  Same goes for the order in which they are returned, they are returned as returned by the OS.
  
 The following examples are all from OS X (Darwin)

@@ -25,6 +25,9 @@ Bundler::GemHelper.install_tasks
 Rake::TestTask.new do |t|
   t.pattern = 'test/**/*_test.rb'
   t.libs << 'test'
+
+  # TODO: Don't do this?
+  t.warning = false
 end
 
 # Cucumber acceptance test task
@@ -42,7 +45,7 @@ const Version string = "#{LandrushIp::VERSION}"
 
   File.write('util/version.go', go_version)
 
-  sh 'docker pull golang:1.6'
+  sh 'docker pull golang:1.7'
   sh 'docker run --rm -v $(pwd)/util:/usr/src/landrush-ip -w /usr/src/landrush-ip golang:1.6 make'
 end
 
