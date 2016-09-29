@@ -14,7 +14,7 @@ module LandrushIp
     def initialize
       @override = UNSET_VALUE
       @auto_install = UNSET_VALUE
-      @logger   = Log4r::Logger.new('vagrantplugins::landruship::config')
+      @logger = Log4r::Logger.new('vagrantplugins::landruship::config')
     end
 
     def default_options(new_values = {})

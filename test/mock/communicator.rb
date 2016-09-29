@@ -11,7 +11,7 @@ module Mock
       responses[command] = response
     end
 
-    def sudo(command, opts=nil)
+    def sudo(command, _opts = nil)
       commands[:sudo] << command
       responses[command]
     end
@@ -28,7 +28,7 @@ module Mock
       true
     end
 
-    def upload(source, dest)
+    def upload(_source, _dest)
       true
     end
 
