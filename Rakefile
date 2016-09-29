@@ -25,6 +25,9 @@ Bundler::GemHelper.install_tasks
 Rake::TestTask.new do |t|
   t.pattern = 'test/**/*_test.rb'
   t.libs << 'test'
+
+  #TODO: Don't do this?
+  t.warning = false
 end
 
 # Cucumber acceptance test task
