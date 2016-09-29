@@ -24,7 +24,7 @@ module LandrushIp
 
     def auto_install?
       # Keeping override for backward compatibility
-      @auto_install || @override
+      @auto_install || @override == true
     end
 
     def finalize!
