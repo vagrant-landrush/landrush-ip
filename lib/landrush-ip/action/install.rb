@@ -16,7 +16,7 @@ module LandrushIp
       end
 
       def install
-        @env[:ui].warn I18n.t('vagrant.config.landrush_ip.not_installed')
+        @env[:ui].info I18n.t('vagrant.config.landrush_ip.not_installed')
 
         raise Vagrant::LandrushIp::Error, :cannot_install unless @machine.guest.capability(:landrush_ip_install)
       end
