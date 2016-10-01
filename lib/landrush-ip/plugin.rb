@@ -51,7 +51,7 @@ module LandrushIp
         end
 
         if defined?(VagrantPlugins::ProviderLibvirt)
-          hook.after(VagrantPlugins::ProviderLibvirt::Action::CreateNetworks, Action::Install, :provision)
+          hook.after(VagrantPlugins::ProviderLibvirt::Action::CreateNetworkInterfaces, Action::Install, :provision)
         end
 
         if defined?(HashiCorp::VagrantVMwarefusion)
