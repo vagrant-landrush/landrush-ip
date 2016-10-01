@@ -45,8 +45,10 @@ const Version string = "#{LandrushIp::VERSION}"
 
   File.write('util/version.go', go_version)
 
-  sh 'docker pull golang:1.7'
-  sh 'docker run --rm -v $(pwd)/util:/usr/src/landrush-ip -w /usr/src/landrush-ip golang:1.6 make'
+  go_version = ENV['GO_VERSION'] || '1.7'
+
+  sh "docker pull golang:#{go_version}"
+  sh "docker run --rm -v $(pwd)/util:/usr/src/landrush-ip -w /usr/src/landrush-ip golang:#{go_version} make"
 end
 
 task features: :init
