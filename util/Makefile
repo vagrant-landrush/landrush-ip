@@ -11,6 +11,7 @@ GOOSARCH = darwin_386 \
 	darwin_amd64 \
 	linux_386 \
 	linux_amd64 \
+	linux_arm64 \
 	windows_386 \
 	windows_amd64
 
@@ -22,6 +23,7 @@ linux_%: export GOOS=linux
 
 %_386: export GOARCH=386
 %_amd64: export GOARCH=amd64
+%_arm64: export GOARCH=arm64
 
 # Phony targets
 .PHONY: all deps clean $(GOOSARCH)
@@ -33,7 +35,7 @@ build: clean deps
 		-rebuild \
 		-ldflags="-s" \
 		-os "linux windows" \
-		-arch "386 arm amd64"
+		-arch "386 arm64 amd64"
 
 deps:
 	go get github.com/mitchellh/gox
