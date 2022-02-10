@@ -35,7 +35,7 @@ build: clean deps
 		-rebuild \
 		-ldflags="-s" \
 		-os "linux windows" \
-		-arch "386 arm64 amd64"
+		-arch "386 arm arm64 amd64"
 
 deps:
 	go get github.com/mitchellh/gox
