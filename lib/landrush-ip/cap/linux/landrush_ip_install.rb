@@ -9,6 +9,8 @@ module LandrushIp
             'landrush-ip-linux_amd64'
           elsif uname =~ /(arm)/i
             'landrush-ip-linux_arm'
+          elsif uname =~ /(aarch64)/i
+            'landrush-ip-linux_arm64'
           elsif uname =~ /(i386|i686)/i
             'landrush-ip-linux_386'
           else
